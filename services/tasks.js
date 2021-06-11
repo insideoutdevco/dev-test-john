@@ -20,8 +20,15 @@ async function getAll(page = 1, limit = 1, topic, sortBy='inserted', order='ASC'
   let query = '';
   let params = [];
 
-  query = `SELECT task_id, topic, inserted FROM tasks WHERE topic LIKE ? ORDER BY ${sortBy} ${order} LIMIT ?,?`;
-  params = [topic, offset, limit]
+  if(topic) {
+    query = `SELECT task_id, topic, inserted, priority  FROM tasks WHERE topic LIKE ? ORDER BY ${sortBy} ${order} LIMIT ?,?`;
+    params = [topic, offset, limit]
+  } else {
+    query = `SELECT task_id, topic, inserted, priority  FROM tasks ORDER BY ${sortBy} ${order} LIMIT ?,?`;
+    params = [offset, limit]
+  }
+
+
 
 
   const rows = await db.query(
