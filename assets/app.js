@@ -34,7 +34,6 @@ console.log("🚀 ~ file: app.js ~ line 2 ~ createPaginationNavs ~ currentPage",
 const render = function(data, totalPages, currentPage) {
     createPaginationNavs(totalPages, currentPage);
     
-
     // table headings
     var columnHeadings = Object.keys(data[0]);
 
@@ -47,12 +46,9 @@ const render = function(data, totalPages, currentPage) {
     // Create table.
     var table = document.createElement('table');
     table.setAttribute("id", "table");
-
     table.classList.add("table");
-    // table.classList.add("table-striped");
-    // table.classList.add("table-class");
-
     document.getElementById("data-list").appendChild(table);
+
     // Add the header row.
     var header = table.createTHead();
     var row = header.insertRow(-1);
@@ -92,22 +88,11 @@ const refreshUI = function() {
 }
 
 function filter(page=1){
-
     refreshUI();
-
-    console.log("🚀 ~ file: app.js ~ line 76 ~ filter ~ page", page)
     var topic=document.getElementById("SearchText").value; 
-    console.log("🚀 ~ file: app.js ~ line 83 ~ filter ~ topic", topic)
-    
-    var limit=document.getElementById("limit").value; 
-    console.log("🚀 ~ file: app.js ~ line 84 ~ filter ~ limit", limit)
-
+    var limit=document.getElementById("limit").value;
     var sortBy=document.getElementById("sortBy").value; 
-    console.log("🚀 ~ file: app.js ~ line 84 ~ filter ~ limit", limit)
-
-    var order=document.getElementById("order").value; 
-    console.log("🚀 ~ file: app.js ~ line 84 ~ filter ~ limit", limit)
-
+    var order=document.getElementById("order").value;
     const url = `http://52.16.45.178/api?page=${page}&&limit=${limit}&&topic=${topic}%&&sortBy=${sortBy}&&order=${order}`
     load(url)
 }
@@ -129,10 +114,16 @@ function load(URL){
 
         const totalRows = xhr.response.totalRows;
         const totalPages = xhr.response.totalPages;
-        const currentPage = xhr.response.currentPage
+        const currentPage = xhr.response.currentPage;bodyParser
 
         console.log("🚀 ~ file: app.js ~ line 120 ~ load ~ data", JSON.stringify(data));
-        render(data, totalPages, currentPage)
+
+        if(data.length === 0) {
+            refreshUI();
+        } else {
+            render(data, totalPages, currentPage);
+
+        }
     };
 
     xhr.onerror = function() { // only triggers if the request couldn't be made at all
