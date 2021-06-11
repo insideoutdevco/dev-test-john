@@ -105,7 +105,7 @@ function filter(page=1){
     var order=document.getElementById("order").value; 
     console.log("🚀 ~ file: app.js ~ line 84 ~ filter ~ limit", limit)
 
-    const url = `http://52.16.45.178:3000/api?page=${page}&&limit=${limit}&&topic=${topic}%&&sortBy=${sortBy}&&order=${order}`
+    const url = `http://52.16.45.178/api?page=${page}&&limit=${limit}&&topic=${topic}%&&sortBy=${sortBy}&&order=${order}`
     load(url)
 }
 
