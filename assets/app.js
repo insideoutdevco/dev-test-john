@@ -32,15 +32,6 @@ console.log("🚀 ~ file: app.js ~ line 2 ~ createPaginationNavs ~ currentPage",
           });
 }
 const render = function(data, totalPages, currentPage) {
-
-    // Re render table and pagination nav
-    var isTableExist = document.getElementById("table");
-    var isNavExist = document.getElementById("page-list");
-    if(isTableExist && isNavExist) {
-        isTableExist.parentNode.removeChild(isTableExist);
-        isNavExist.parentNode.removeChild(isNavExist);
-    }
-
     createPaginationNavs(totalPages, currentPage);
     
 
@@ -90,8 +81,20 @@ const render = function(data, totalPages, currentPage) {
 
 }
 
+const refreshUI = function() {
+    // Re render table and pagination nav
+    var isTableExist = document.getElementById("table");
+    var isNavExist = document.getElementById("page-list");
+    if(isTableExist && isNavExist) {
+        isTableExist.parentNode.removeChild(isTableExist);
+        isNavExist.parentNode.removeChild(isNavExist);
+    }
+}
 
 function filter(page=1){
+
+    refreshUI();
+
     console.log("🚀 ~ file: app.js ~ line 76 ~ filter ~ page", page)
     var topic=document.getElementById("SearchText").value; 
     console.log("🚀 ~ file: app.js ~ line 83 ~ filter ~ topic", topic)
