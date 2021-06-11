@@ -114,7 +114,7 @@ function load(URL){
 
         const totalRows = xhr.response.totalRows;
         const totalPages = xhr.response.totalPages;
-        const currentPage = xhr.response.currentPage;bodyParser
+        const currentPage = xhr.response.currentPage;
 
         console.log("🚀 ~ file: app.js ~ line 120 ~ load ~ data", JSON.stringify(data));
 
